@@ -32,8 +32,10 @@ void MainWindow::changeEvent(QEvent *e)
 }
 
 void MainWindow::checkInput(){
-    std::string input=numberInput;
-    std::cout<<input;
+    //std::cout << "button clicked" << std::endl;
+    std::string input=ui->inputField->text().toUtf8().constData();
+    std::cout << "number input: " << input << std::endl;
+
 
     if(checkLuhn(input)){
         std::cout<<"what";
