@@ -40,15 +40,24 @@ class MainWindow : public QMainWindow
         std::vector<ushort> countrySize;
         std::vector<ushort> phoneSize;
 
+        std::vector<QString> amexBin;
+        std::vector<QString> amexBankName;
+        std::vector<QString> amexCardType;
+//        std::vector<ushort> amexNameSize;
+        std::vector<ushort> amexCTSize;
+        std::vector<ushort> amexPhoneSize;
+
 
 
 
         void connectSignalsSlots();
-        void readFile(const QString &fileName);
+        void readVisaFile(const QString &fileName);
+        void readAmexFile(const QString &fileName);
         void saveFile(const QString &fileName);
 
     private slots:
-        void openInputFile();
+        void openVisaFile();
+        void openAmexFile();
         void openSaveFile();
 };
 
