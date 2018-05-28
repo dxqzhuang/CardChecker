@@ -20,7 +20,7 @@
       <x>20</x>
       <y>20</y>
       <width>601</width>
-      <height>371</height>
+      <height>321</height>
      </rect>
     </property>
    </widget>
@@ -35,16 +35,16 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="exitButton">
+      <widget class="QPushButton" name="loadAmex">
        <property name="text">
-        <string>Exit</string>
+        <string>Open Amex</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="openFileButton">
+      <widget class="QPushButton" name="loadVisa">
        <property name="text">
-        <string>Open File</string>
+        <string>Open Visa</string>
        </property>
       </widget>
      </item>
