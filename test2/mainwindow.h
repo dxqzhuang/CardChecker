@@ -28,36 +28,45 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         QString fileContents;
 
-        std::vector<QString> bin;
-        std::vector<QString> bankName;
-        std::vector<QString> cardType1;
-        std::vector<QString> cardType2;
-        std::vector<QString> country;
-        std::vector<ushort> nameSize;
+        //data vectors required for visa
+        std::vector<QString> visaBin;
+        std::vector<QString> visaBankName;
+        std::vector<QString> visaCardType1;
+        std::vector<QString> visaCardType2;
+        std::vector<QString> visaCountry;
+        std::vector<ushort> visaNameSize;
+        std::vector<ushort> visaCT1Size;
+        std::vector<ushort> visaCT2Size;
+        std::vector<ushort> visaCountrySize;
+        std::vector<ushort> visaPhoneSize;
 
-        std::vector<ushort> CT1Size;
-        std::vector<ushort> CT2Size;
-        std::vector<ushort> countrySize;
-        std::vector<ushort> phoneSize;
-
+        //data vectors required for amex
         std::vector<QString> amexBin;
-        std::vector<QString> amexBankName;
         std::vector<QString> amexCardType;
-//        std::vector<ushort> amexNameSize;
         std::vector<ushort> amexCTSize;
         std::vector<ushort> amexPhoneSize;
 
+        //data vectors required for mc
+        std::vector<QString> mcBin;
+        std::vector<QString> mcBankName;
+        std::vector<QString> mcCountry;
+        std::vector<ushort> mcNameSize;
+        std::vector<ushort> mcCountrySize;
+        std::vector<ushort> mcPhoneSize;
 
 
 
         void connectSignalsSlots();
         void readVisaFile(const QString &fileName);
         void readAmexFile(const QString &fileName);
+        void readMCFile(const QString &fileName);
+
         void saveFile(const QString &fileName);
 
     private slots:
         void openVisaFile();
         void openAmexFile();
+        void openMCFile();
         void openSaveFile();
 };
 
