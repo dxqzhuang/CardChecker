@@ -125,10 +125,10 @@ void MainWindow::readAmexFile(const QString &fileName)
         }
     }
 
-    fileContents.remove(0,84);
+    fileContents.remove(0,83);
 
     size_t entry=0;
-//    while(entry<1000){                  //total entries: ???
+    while(entry<1000){                  //total entries: ???
         fileContents.remove(0,3);       //clean up bin size and country size
                                         //and bank name size
         //0. reading in size info
@@ -140,18 +140,13 @@ void MainWindow::readAmexFile(const QString &fileName)
         for(int i=0; i<6; i++){
             line+=fileContents[i];
         }
-        bin.push_back(line);
+        amexBin.push_back(line);
         fileContents.remove(0,6);   //clean up
         line = "";
 
-        //2.read in country
-        for(ushort i=0; i<countrySize[entry];++i){
-            line+=fileContents[i];
-        }
-        country.push_back(line);
 
-        fileContents.remove(0,int(countrySize[entry]));    //clean up
-        line = "";
+        //2. remove country
+        fileContents.remove(0,24);    //clean up
 
         //3.remove N/A bank names
         fileContents.remove(0,3);
@@ -167,9 +162,9 @@ void MainWindow::readAmexFile(const QString &fileName)
 
         //5. remove phone number
         fileContents.remove(0,int(amexPhoneSize[entry]));  //clean up phone numbers
-        ui->fileContentsDisplay->append(amexBin[entry]);
+        ui->fileContentsDisplay->append(amexCardType[entry]);
         entry++;
-//    }
+    }
     input.close();
 }
 
