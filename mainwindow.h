@@ -7,11 +7,18 @@
 #include <QFileDialog>
 #include <string>
 #include <iostream>
+#include <regex>
+#include <map>
+#include <numeric>
+#include <vector>
+#include <sstream>
+#include <ctime>
 
 namespace Ui {
 class MainWindow;
 }
 
+using namespace std;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -30,6 +37,9 @@ private:
 
     void connectSignalsSlots();
     bool checkLuhn(const std::string &input);
+    string detectCardType(string number);
+    string generateCardNum(string bin, int len);
+
 
 private slots:
     void checkInput();
