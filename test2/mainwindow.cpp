@@ -32,14 +32,14 @@ void MainWindow::readFile(const QString &fileName)
     QFile input(fileName);
     input.open(QFile::ReadOnly);
     fileContents.clear();
-    QString line;
-    QString subLine;
+    QString line;       //to be manipulated by the function
+    QString subLine;    //to be used for push_back vectors
 //    while(!input.atEnd())
 //        if(input.getChar(&data))
 //            fileContents += data;
     ushort index;
     QChar qdata;
-    for(size_t i =0; i<171; ++i){   //read from .bat file
+    for(size_t i =0; i<178; ++i){   //read from .bat file
         if(input.getChar(&data)){
             fileContents+=data;
         }
@@ -47,71 +47,67 @@ void MainWindow::readFile(const QString &fileName)
 
 
     line=fileContents;
-    line.remove(0,113);
-//    subLine="";
+    line.remove(0,109);
+    subLine="";
     QChar temp;
 //    while(1){
-        //1. reading in BIN
-        for(int i=0; i<6; i++){
-            subLine+=line[i];
-        }
-        bin.push_back(subLine);
 
-        line.remove(0,6);   //clear off bin
-        subLine = "";       //clearing subline
+    //0. reading in size info
+    CT1Size.push_back(line[0].unicode());
+    CT2Size.push_back(line[1].unicode());
+    countrySize.push_back(line[2].unicode());
+    phoneSize.push_back(line[3].unicode());
+    line.remove(0,4);
 
-        //2. read in stringSize for bank name(unicode, 7th digit)
-        temp=line[6];
-        nameSize.push_back(temp.unicode()); //char to ushort
+    //1. reading in BIN
+    for(int i=0; i<6; i++){
+        subLine+=line[i];
+    }
+    bin.push_back(subLine);
+    line.remove(0,6);   //clean up
+    subLine = "";       //clearing subline
 
-        //disregard size and 3 null chars
-        line.remove(0,4);
+    //2. read in stringSize for bank name(unicode, 7th digit)
+    nameSize.push_back(line[0].unicode()); //char to ushort
 
-        //3. read in bank name//nameSize[j] fix counter later
-        for(ushort i=0; i<(temp.unicode()); i++){
-            subLine+=line[i];
-        }
-        bankName.push_back(subLine);
+    //disregard size and 3 null chars
+    line.remove(0,4);   //clean up
 
-//        line.remove(0,nameSize[0]);       //nameSize is ushort, problem
-        subLine = "";   //clearing subline
+    //3. read in bank name//nameSize[j] fix counter later
+    for(ushort i=0; i<(nameSize[0]); ++i){
+        subLine+=line[i];
+    }
+    bankName.push_back(subLine);
 
-        //4. read in cardtype
-//        QChar type1=line[0];
-//        ui->fileContentsDisplay->append(line);
+    line.remove(0,int(nameSize[0]));    //clean up
+    subLine = "";
 
+    //4. read in cardtype1
+    for(ushort i=0; i<CT1Size[0];++i){
+        subLine+=line[i];
+    }
+    cardType1.push_back(subLine);
 
-//        switch(type1.toLatin1()){
-//            case 'N':
-//                cardType1[0].push_back("N/A");
-//                line.remove(0,3);
-//                break;
-//            case 'C':
-//                cardType1[0].push_back("CREDIT");
-//                line.remove(0,6);
-//                break;
-//            case 'D':
-//                cardType1[0].push_back("DEBIT");
-//                line.remove(0,5);
-//                break;
-//            case 'P':
-//                cardType1[0].push_back("PREPAID");
-//                line.remove(0,7);
-//                break;
-//            default:
-//                ui->fileContentsDisplay->append("CARDTYPE 1 READ FAILURE");
-//                break;
-//        }
+    line.remove(0,int(CT1Size[0]));    //clean up
+    subLine = "";
 
+    //5. read in cardtype2
+    for(ushort i=0; i<CT2Size[0];++i){
+        subLine+=line[i];
+    }
+    cardType2.push_back(subLine);
+    line.remove(0,int(CT2Size[0]));    //clean up
+    subLine = "";
+    //6.read in country
+    for(ushort i=0; i<countrySize[0];++i){
+        subLine+=line[i];
+    }
+    country.push_back(subLine);
+    line.remove(0,int(countrySize[0]));    //clean up
+    subLine = "";
+    //remove junk
+    line.remove(0,int(phoneSize[0]));    //clean up phone numbers
 
-
-
-
-        //read in card type 1
-        //read in card type 2
-        //read in country
-        //read in junk until first number appears
-        //remove all that's is read in line
 //    }
 
 
@@ -123,21 +119,9 @@ void MainWindow::readFile(const QString &fileName)
 //    ui->fileContentsDisplay->clear();
     ui->fileContentsDisplay->append(bin[0]);
     ui->fileContentsDisplay->append(bankName[0]);
-//    ui->fileContentsDisplay->append(cardType1[0]);
-
-
-//    ui->fileContentsDisplay->append(fileContents);
-//    ui->fileContentsDisplay->append(qdata);
-
-//    std::cout<<index<<std::endl;
-
-//    ui->fileContentsDisplay->append(" is ASCII position: ");
-//    QChar what('');
-//    ui->fileContentsDisplay->append(what);
-//    QChar thefuck('↕');
-//    ui->fileContentsDisplay->append(thefuck);
-
-
+    ui->fileContentsDisplay->append(cardType1[0]);
+    ui->fileContentsDisplay->append(cardType2[0]);
+    ui->fileContentsDisplay->append(country[0]);
 }
 
 

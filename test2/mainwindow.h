@@ -29,11 +29,17 @@ class MainWindow : public QMainWindow
         QString fileContents;
 
         std::vector<QString> bin;
-        std::vector<ushort> nameSize; //bankName string size
         std::vector<QString> bankName;
         std::vector<QString> cardType1;
         std::vector<QString> cardType2;
         std::vector<QString> country;
+        std::vector<ushort> nameSize;
+
+        std::vector<ushort> CT1Size;
+        std::vector<ushort> CT2Size;
+        std::vector<ushort> countrySize;
+        std::vector<ushort> phoneSize;
+
 
 
 
