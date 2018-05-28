@@ -39,7 +39,7 @@ void MainWindow::readFile(const QString &fileName)
 //            fileContents += data;
     ushort index;
     QChar qdata;
-    for(size_t i =0; i<170; ++i){   //read from .bat file
+    for(size_t i =0; i<171; ++i){   //read from .bat file
         if(input.getChar(&data)){
             fileContents+=data;
         }
@@ -65,10 +65,10 @@ void MainWindow::readFile(const QString &fileName)
         nameSize.push_back(temp.unicode()); //char to ushort
 
         //disregard size and 3 null chars
-        line.remove(7,3);
+        line.remove(0,4);
 
         //3. read in bank name//nameSize[j] fix counter later
-        for(ushort i=7; i<(7+temp.unicode()); i++){
+        for(ushort i=0; i<(temp.unicode()); i++){
             subLine+=line[i];
         }
         bankName.push_back(subLine);
