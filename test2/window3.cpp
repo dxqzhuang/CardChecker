@@ -9,7 +9,7 @@ window3::window3(database& databs, QWidget *parent) :
 {
     ui->setupUi(this);
     connectSignalsSlots();
-    fillBankList();
+    fillBankList("visa");
     srand(time(NULL));
 }
 
@@ -36,6 +36,10 @@ void window3::window3_type_field_changed(const QString& text)
         if card type is amex,
         grey out bankName dropdown menu! amex does NOT have bank names.
       */
+    //1. change bank name dropdownlist based on what card type(visa, mc, amex)
+    fillBankList(text.toStdString());
+
+    //2. toggle bank name because apparently amex is only issued by american express
     if(text == QString::fromStdString("amex"))
         ui->window3_bank_field->setEnabled(false);
     else
@@ -181,7 +185,7 @@ int window3::cardNumLen(string cardType)
       @example visa ==> 16
       @ pre:  param must be one of the following: "visa",  "amex" ,"mc"
       */
-    if(cardType == "visa" || cardType == "mc")
+    if(cardType == "visa" || cardType == "mastercard")
         return 16;
     else if(cardType == "amex")
         return 15;
@@ -212,13 +216,27 @@ void window3::packUpEntryRequirement()
     entryRequirements.push_back(entryRequirement);
 }
 
-void window3::fillBankList()
+void window3::fillBankList(const string &cardType)
 {
+    /*
+     * fill/refill bank name dropdown list based on card type
+     * because visa/amex/mastercard all have different issuing bank vectors
+     */
     QStringList commands;
     //ui->window3_bank_field->addItem();
-    for(int i=0; i<db.visaBankName.size();i++)
-        commands.push_back(db.visaBankName[i]);
+    if(cardType == "visa")
+        for(int i=10; i<db.visaBankName.size();i++)
+            commands.push_back(db.visaBankName[i]);
+    else if(cardType == "mastercard")
+        for(int i=0; i<db.mcBankName.size(); i++)
+            commands.push_back(db.mcBankName[i]);
+    else if(cardType == "amex")
+        commands.push_back(QString::fromStdString("American Express"));
     commands = commands.toSet().toList();
-    qSort(commands);
+//    if(cardType == "mastercard")
+//        for(int i=0; i<37; i++)
+//            commands.removeAt(i);
+
+    ui->window3_bank_field->clear();
     ui->window3_bank_field->addItems(commands);
 }

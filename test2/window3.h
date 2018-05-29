@@ -41,7 +41,7 @@ class window3 : public QMainWindow
         string generateCardNum(string bin, int len);
         database& db;
         vector<map<string,string>>entryRequirements;
-        void fillBankList();
+        void fillBankList(const string& cardType);
 
 };
 
