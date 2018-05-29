@@ -39,18 +39,13 @@ void window2::window2_check_btn_pressed()
     }else{
         ui->window2_result_field->append("BAD FUCKING CARD!");
     }
-
-    //!!! FIX !!!ADD BANK HERE!!!!
-
-
-
 }
 
 bool window2::checkLuhn(const std::string &input){
     int sum=0;
     bool second=false;
     for(int i=input.length()-1; i>=0; --i){ //starting from the right end
-        int d = input[i] - 'a';             //ASCII string to int
+        int d = input[i] - '0';             //ASCII string to int
         if(second == true)       d=d*2;     //double every second digit
         sum+=d/10;                          //if result of doubling > 10
         sum+=d%10;                          //add two digits of result

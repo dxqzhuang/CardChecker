@@ -10,6 +10,8 @@ using namespace std;
 #include <iostream>
 #include <algorithm>
 using namespace std;
+
+enum ERRORS{BIN_NOT_FOUND};
 class database
 {
 public:
@@ -19,7 +21,7 @@ public:
     QString randomCardType(string card);    //return a random card type("Classic", etc)
     bool whichBankIssuedThis(QString card, string& bankName, string&level);
 
-
+    bool binFind(const string& bankName, const string& cardType, string& bin);
 
 
 
@@ -50,6 +52,12 @@ public:
     std::vector<ushort> mcCountrySize;
     std::vector<ushort> mcPhoneSize;
     QString fileContents;
+
+private:
+    int search(const QString &name, char type);
+    bool searchVisa(const string &cardType, const string& bankName, string &bin);
+    bool searchMc(const string &cardType, const string& bankName, string &bin);
+    bool searchAmex(const string &cardType, string&bin);
 };
 
 #endif // DATABASE_H

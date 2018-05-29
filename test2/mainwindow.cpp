@@ -18,7 +18,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::connectSignalsSlots()
 {
 //    connect(ui->loadAmex, SIGNAL(pressed()), this, SLOT(openAmexFile()));
@@ -30,7 +29,6 @@ void MainWindow::connectSignalsSlots()
     connect(ui->window1_load_btn, SIGNAL(pressed()), this,SLOT(loadDatabase()));
 }
 
-
 void MainWindow::window1_check_btn_pressed()
 {
 
@@ -38,7 +36,6 @@ void MainWindow::window1_check_btn_pressed()
     wind2 = new window2(db);
     wind2->show();
 }
-
 
 void MainWindow::window1_generate_btn_pressed()
 {

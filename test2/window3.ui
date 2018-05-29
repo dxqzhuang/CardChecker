@@ -115,6 +115,11 @@
     </item>
     <item>
      <property name="text">
+      <string>mastercard</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>amex</string>
      </property>
     </item>

@@ -151,11 +151,83 @@ bool database::whichBankIssuedThis(QString card, string &bankName, string &level
     it = std::find(amexBin.begin(), amexBin.end(), bin);
     if(it!= amexBin.end()){
         index =std::distance(amexBin.begin(), it);
-        level = "N/A";
-        bankName = "N/A";
+        level = amexCardType[index].toStdString();
+        bankName = "American Express";
         return true;
     }
 
     //3. if bin is not found:
     return false;
 }
+
+bool database::binFind(const string& bankName, const string& cardType, string& bin)
+{
+    /**
+      given a bank name and a card type, return a perfect bin number that satisfies both requirements
+    @param cardType: visa/mc/amex
+    @paran bankName: "bank of america", etc...
+    @param bin this will be set to the found bin if bin is found.
+      */
+
+    //if not found in visa vectors ,
+    //see if it can be found in mastercard vectors; if not,
+    //see if it can be found in amex vectors
+    return searchVisa(cardType,bankName,bin) ||
+            searchMc(cardType,bankName,bin) ||
+            searchAmex(cardType, bin);
+
+}
+
+bool database::searchVisa(const string& cardType, const string& bankName, string& bin)
+{
+    /***
+     * in visaBankNames vector, search for the given bank name
+     * helper function for binFind
+     */
+    if(cardType != "visa") return false;
+
+    std::vector<QString>::iterator it;
+    int index;
+
+    it = std::find(visaBankName.begin(), visaBankName.end(), QString::fromStdString(bankName));
+    if(it!= visaBankName.end()){
+        index =std::distance(visaBankName.begin(), it);
+        bin = visaBin[index].toStdString();
+        return true;
+    }
+
+    return false;
+
+}
+
+bool database::searchMc(const string &cardType, const string& bankName, string &bin)
+{
+    /***
+     * in mcBankNames vector, search for the given bank name
+     * helper function for binFind
+     */
+    if(cardType != "mastercard") return false;
+
+    std::vector<QString>::iterator it;
+    int index;
+
+    it = std::find(mcBankName.begin(), mcBankName.end(), QString::fromStdString(bankName));
+    if(it!= mcBankName.end()){
+        index =std::distance(mcBankName.begin(), it);
+        bin = mcBin[index].toStdString();
+        return true;
+    }
+
+    return false;
+}
+
+bool database::searchAmex(const string& cardType, string&bin)
+{
+    /**
+      since bank names are all N/A with amex, just return a random bin in amexBin vector
+      */
+    if(cardType != "amex") return false;
+    bin = amexBin[rand()%amexBin.size()].toStdString();
+    return true;
+}
+
