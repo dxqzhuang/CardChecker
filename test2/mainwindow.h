@@ -2,11 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <window2.h>
+#include <window3.h>
 #include <QString>
 #include <QFile>
 #include <QFileDialog>
 #include <vector>
-
+#include <database.h>
 
 namespace Ui {
 class MainWindow;
@@ -22,52 +24,35 @@ class MainWindow : public QMainWindow
 
 
     protected:
-        void changeEvent(QEvent *e);
+        //void changeEvent(QEvent *e);
+
 
     private:
         Ui::MainWindow *ui;
-        QString fileContents;
-
-        //data vectors required for visa
-        std::vector<QString> visaBin;
-        std::vector<QString> visaBankName;
-        std::vector<QString> visaCardType1;
-        std::vector<QString> visaCardType2;
-        std::vector<QString> visaCountry;
-        std::vector<ushort> visaNameSize;
-        std::vector<ushort> visaCT1Size;
-        std::vector<ushort> visaCT2Size;
-        std::vector<ushort> visaCountrySize;
-        std::vector<ushort> visaPhoneSize;
-
-        //data vectors required for amex
-        std::vector<QString> amexBin;
-        std::vector<QString> amexCardType;
-        std::vector<ushort> amexCTSize;
-        std::vector<ushort> amexPhoneSize;
-
-        //data vectors required for mc
-        std::vector<QString> mcBin;
-        std::vector<QString> mcBankName;
-        std::vector<QString> mcCountry;
-        std::vector<ushort> mcNameSize;
-        std::vector<ushort> mcCountrySize;
-        std::vector<ushort> mcPhoneSize;
-
+        window2 *wind2;
+        window3 *wind3;
+        database db;
 
 
         void connectSignalsSlots();
-        void readVisaFile(const QString &fileName);
-        void readAmexFile(const QString &fileName);
-        void readMCFile(const QString &fileName);
 
-        void saveFile(const QString &fileName);
+//        void readVisaFile(const QString &fileName);
+//        void readAmexFile(const QString &fileName);
+//        void readMCFile(const QString &fileName);
+//        void saveFile(const QString &fileName);
 
     private slots:
-        void openVisaFile();
-        void openAmexFile();
-        void openMCFile();
-        void openSaveFile();
+//        void openVisaFile();
+//        void openAmexFile();
+//        void openMCFile();
+//        void openSaveFile();
+        void window1_check_btn_pressed();
+
+
+        void window1_generate_btn_pressed();
+        void loadDatabase();
+
+
 };
 
 #endif // MAINWINDOW_H

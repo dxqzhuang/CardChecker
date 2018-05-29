@@ -23,12 +23,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
+QT += printsupport
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    window2.cpp \
+    window3.cpp \
+    window4.cpp \
+    database.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    window2.h \
+    window3.h \
+    window4.h \
+    database.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    window2.ui \
+    window3.ui \
+    window4.ui \
+    window2.ui \
+    window3.ui \
+    window4.ui
