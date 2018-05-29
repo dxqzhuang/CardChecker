@@ -15,7 +15,6 @@ window2::~window2()
     delete ui;
 }
 
-
 void window2::connectSignalsSlots()
 {
     connect(ui->window2_check_btn, SIGNAL(pressed()),this, SLOT(window2_check_btn_pressed()));
@@ -26,8 +25,17 @@ void window2::window2_check_btn_pressed()
     std::string input = ui->window2_input_field->text().toUtf8().constData();
     if(checkLuhn(input))
     {
+        string issuingBank;
+        string cardLevel;
         ui->window2_result_field->append("CONGRATULATIONS! YOU HAVE A VALID CARD\n");
         ui->window2_result_field->append("Card type: " + QString::fromStdString(detectCardType(input)));
+        if(!db.whichBankIssuedThis(QString::fromStdString(input), issuingBank, cardLevel))
+        {
+            issuingBank = "N/A";
+            cardLevel = "N/A";
+        }
+        ui->window2_result_field->append("card level: " + QString::fromStdString(cardLevel));
+        ui->window2_result_field->append("Issuing Bank: " + QString::fromStdString(issuingBank));
     }else{
         ui->window2_result_field->append("BAD FUCKING CARD!");
     }

@@ -136,8 +136,7 @@ string window3::findBinNumber(string cardType, string bankName)
     /**
       @brief find the perfect number that matches BOTH the card type AND the bank name
       @example bank of america, visa card ==> 410234
-      */
-    //!!! THIS IS A STUB!!FIX THIS!!@
+    */
     return binFind(QString::fromStdString(cardType), 'c').toStdString();
 }
 
@@ -155,6 +154,7 @@ int window3::cardNumLen(string cardType)
         return 15;
 }
 
+//!!BUG !! DOES NOT WORK WITH AMEX!! FIX THIS
 int window3::search(const QString &name, char type){
     //only searches visa files so far
     /**
@@ -191,7 +191,8 @@ int window3::search(const QString &name, char type){
     return it;
 }
 
-QString window3::binFind(const QString &name, char type){
+QString window3::binFind(const QString &name, char type)
+{
     //returns a bin with given requirement
     int index=this->search(name,type);
     return db.visaBin[index];

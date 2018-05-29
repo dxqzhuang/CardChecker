@@ -120,3 +120,42 @@ QString database::randomCardType(string card)
     else
         cout << "ERROR: randomCardType: bad type!" << endl;
 }
+
+bool database::whichBankIssuedThis(QString card, string &bankName, string &level)
+{
+    /**
+      @brief find the bank that issued the given card number, and find the index
+      */
+    //1. pull out the 6 digit bin number
+    QString bin = card.mid(0,6);
+    std::vector<QString>::iterator it;
+    int index;
+
+    //2. search the bin from visaBin, amex, and mcBin
+    it = std::find(visaBin.begin(), visaBin.end(), bin);
+    if(it!= visaBin.end()){
+        index =std::distance(visaBin.begin(), it);
+        level = visaCardType2[index].toStdString();
+        bankName = visaBankName[index].toStdString();
+        return true;
+    }
+
+    it = std::find(mcBin.begin(), mcBin.end(), bin);
+    if(it!= mcBin.end()){
+        index =std::distance(mcBin.begin(), it);
+        level = "N/A";
+        bankName = mcBankName[index].toStdString();
+        return true;
+    }
+
+    it = std::find(amexBin.begin(), amexBin.end(), bin);
+    if(it!= amexBin.end()){
+        index =std::distance(amexBin.begin(), it);
+        level = "N/A";
+        bankName = "N/A";
+        return true;
+    }
+
+    //3. if bin is not found:
+    return false;
+}

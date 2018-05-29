@@ -8,6 +8,7 @@ using namespace std;
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 class database
 {
@@ -15,7 +16,15 @@ public:
 
     database();
     void readFromFile(const QString &fileName);
-    QString randomCardType(string card);
+    QString randomCardType(string card);    //return a random card type("Classic", etc)
+    bool whichBankIssuedThis(QString card, string& bankName, string&level);
+
+
+
+
+
+
+
     std::vector<QString> visaBin;
     std::vector<QString> visaBankName;
     std::vector<QString> visaCardType1;
