@@ -17,34 +17,34 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>120</y>
-      <width>81</width>
+      <x>240</x>
+      <y>90</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>how many:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Number of cards&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>250</y>
+      <x>240</x>
+      <y>260</y>
       <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>bank:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Bank&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="window3_new_entry_btn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>360</y>
+      <x>520</x>
+      <y>330</y>
       <width>41</width>
       <height>31</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QLineEdit" name="window3_how_many_field">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>120</y>
+      <x>430</x>
+      <y>90</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -66,34 +66,34 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>240</x>
       <y>190</y>
       <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>type:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Type&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="window3_generate_btn">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>370</y>
+      <x>240</x>
+      <y>330</y>
       <width>113</width>
       <height>32</height>
      </rect>
     </property>
     <property name="text">
-     <string>generate</string>
+     <string>Generate</string>
     </property>
    </widget>
    <widget class="QComboBox" name="window3_bank_field">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>250</y>
+      <x>440</x>
+      <y>260</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -102,25 +102,25 @@
    <widget class="QComboBox" name="window3_type_field">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>200</y>
+      <x>440</x>
+      <y>190</y>
       <width>121</width>
       <height>21</height>
      </rect>
     </property>
     <item>
      <property name="text">
-      <string>visa</string>
+      <string>VISA</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>mastercard</string>
+      <string>Mastercard</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>amex</string>
+      <string>American Express</string>
      </property>
     </item>
    </widget>
@@ -131,7 +131,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
