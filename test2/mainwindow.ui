@@ -6,12 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
-    <height>441</height>
+    <width>290</width>
+    <height>243</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Apple Braille</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(204, 204, 204);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="window1_check_btn">
@@ -20,14 +28,17 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>70</y>
-      <width>171</width>
-      <height>81</height>
+      <x>70</x>
+      <y>10</y>
+      <width>151</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
     <property name="text">
-     <string>check</string>
+     <string>Check</string>
     </property>
    </widget>
    <widget class="QPushButton" name="window1_generate_btn">
@@ -36,51 +47,54 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>170</y>
-      <width>171</width>
-      <height>81</height>
+      <x>70</x>
+      <y>70</y>
+      <width>151</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
     <property name="text">
-     <string>generate</string>
+     <string>Generate</string>
     </property>
    </widget>
    <widget class="QPushButton" name="window1_load_btn">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>280</y>
-      <width>171</width>
-      <height>81</height>
+      <x>70</x>
+      <y>140</y>
+      <width>151</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>LOAD</string>
+     <string>Load</string>
     </property>
    </widget>
    <widget class="QWidget" name="window1_progress_box" native="true">
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>30</y>
-      <width>281</width>
-      <height>241</height>
+      <y>10</y>
+      <width>231</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(153, 153, 153);</string>
+     <string notr="true">background-color: rgb(127, 127, 127);</string>
     </property>
     <widget class="QProgressBar" name="window1_progress_bar">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>90</y>
-       <width>118</width>
-       <height>23</height>
+       <x>10</x>
+       <y>60</y>
+       <width>211</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -96,14 +110,14 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>60</x>
        <y>30</y>
-       <width>221</width>
+       <width>111</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Please wait while we load database:</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Loading database:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>
@@ -113,7 +127,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>358</width>
+     <width>290</width>
      <height>22</height>
     </rect>
    </property>

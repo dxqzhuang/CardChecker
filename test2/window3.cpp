@@ -58,12 +58,12 @@ void window3::window3_generate_btn_pressed()
 //    cout << "bankName: " << entryRequirement["bankName"] << endl;
 
     //5.initiate window 4 with the data generated as parameter
-    wind4 = new window4(data);
+    wind4 = new window4(db, data);
 
     //6. show window 4
     wind4->show();
 
-    std::cout << "hello from window3" << std::endl;
+    //std::cout << "hello from window3" << std::endl;
 }
 
 void window3::generateData(vector<map<string,string>>& data,

@@ -37,7 +37,7 @@ void window2::window2_check_btn_pressed()
         ui->window2_result_field->append("card level: " + QString::fromStdString(cardLevel));
         ui->window2_result_field->append("Issuing Bank: " + QString::fromStdString(issuingBank));
     }else{
-        ui->window2_result_field->append("BAD FUCKING CARD!");
+        ui->window2_result_field->append("BAD CARD!");
     }
 }
 

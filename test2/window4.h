@@ -18,6 +18,7 @@
 #include <QTextDocument>
 #include <QDir>
 #include <QMessageBox>
+#include <database.h>
 
 
 namespace Ui {
@@ -31,7 +32,7 @@ class window4 : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit window4(vector<map<string,string>>data, QWidget *parent = 0);
+    explicit window4(database& databs, vector<map<string,string>>data, QWidget *parent = 0);
     /** FOLLOW THIS FORMAT!!!
       [ //vector
           { //map
@@ -62,6 +63,8 @@ private:
     //each inner vector will be displayed separately in a tab.
     vector<vector<map<string,string>>> sortedData;
     vector<QTableWidget*> tables;
+    database& db;
+
 };
 
 #endif // WINDOW4_H

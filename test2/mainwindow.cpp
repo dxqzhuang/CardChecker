@@ -36,7 +36,7 @@ void MainWindow::connectSignalsSlots()
 void MainWindow::window1_check_btn_pressed()
 {
 
-    std::cout << "hello" << std::endl;
+    //std::cout << "hello" << std::endl;
     wind2 = new window2(db);
     wind2->show();
 }

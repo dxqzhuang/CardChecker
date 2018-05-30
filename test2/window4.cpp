@@ -1,9 +1,10 @@
 #include "window4.h"
 #include "ui_window4.h"
 
-window4::window4(vector<map<string,string>>data, QWidget *parent) :
+window4::window4(database& databs, vector<map<string,string>>data, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::window4)
+    ui(new Ui::window4),
+    db(databs)
 {
     /**
       data MUST follow this format:
@@ -32,7 +33,6 @@ window4::window4(vector<map<string,string>>data, QWidget *parent) :
     ui->window4_tabs_widget->removeTab(0);
     generateTabs();
 }
-
 
 
 window4::~window4()
@@ -198,28 +198,52 @@ void window4::window4_save_btn_pressed()
     QString strStream;
     QTextStream out(&strStream);
 
-    const int rowCount = tables[0]->rowCount();
-    const int columnCount = tables[0]->columnCount();
-
     out <<  "<html>\n"
         "<head>\n"
         "<meta Content=\"Text/html; charset=Windows-1251\">\n"
         <<  "</head>\n"
         "<body bgcolor=#ffffff link=#5000A0>\n"
-        "<table border=1 cellspacing=0 cellpadding=2>\n";
+        "<div>Made with pride by:<br>Jack Hou<br>David Zhuang</div>"
+        "<table border=1 cellspacing=0 cellpadding=2 style='width: 800px; margin:5px auto;'>\n";
+    for(int i=0; i<tables.size(); i++)
+    {
 
-    // headers
-    // data table
-    for (int row = 0; row < rowCount; row++) {
-        out << "<tr>";
-        for (int column = 0; column < columnCount; column++) {
-            if (!tables[0]->isColumnHidden(column)) {
-                cout << "row:" << row << ";col: " << column << ";text: " << tables[0]->itemAt(row,column)->text().toStdString() << endl;
-                out << QString("<td bkcolor=0>%1</td>").arg(tables[0]->item(row,column)->text());
-            }
+        const int rowCount = tables[i]->rowCount();
+        const int columnCount = tables[i]->columnCount();
+
+        // headers
+        // data table
+        for (int row = 0; row < rowCount; row++){
+            out << "<tr>";
+            string bankName, cardLevel;
+            //!!!DANGER!!
+            //! //cout << "row:" << row << ";col: " << column << ";text: " << tables[i]->itemAt(row,column)->text().toStdString() << endl;
+            string cardNumber = tables[i]->itemAt(row,0)->text().toStdString();
+            cout << "cardNumber: "  << cardNumber;
+            cout << "index:" << i << endl;
+            db.whichBankIssuedThis(QString::fromStdString(cardNumber), bankName, cardLevel);
+            cout << "bankName: " << bankName << " ; cardLevel: " << cardLevel << endl;
+
+            //1. print card number
+            out << QString("<td bkcolor=0>"+QString::fromStdString(cardNumber)+"</td>");
+
+            //2. print bank name
+            out << QString("<td bkcolor=0>"+QString::fromStdString(bankName)+"</td>");
+
+            //3. print card level(type)
+            out << QString("<td bkcolor=0>"+QString::fromStdString(cardLevel)+"</td>");
+
+
+//            for (int column = 0; column < columnCount; column++){
+//                if (!tables[i]->isColumnHidden(column)) {
+//                    out << QString("<td bkcolor=0>%1</td>").arg(tables[i]->item(row,column)->text());
+//                }
+//            }
+            out << "</tr>\n";
         }
-        out << "</tr>\n";
     }
+
+
     out <<  "</table>\n"
         "</body>\n"
         "</html>\n";
