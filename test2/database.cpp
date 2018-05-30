@@ -5,6 +5,10 @@ database::database()
     srand(time(NULL));
 }
 
+database::~database()
+{
+    delete progress;
+}
 
 bool database::readFromFile(const QString &fileName){
     char data;
@@ -12,7 +16,7 @@ bool database::readFromFile(const QString &fileName){
     input.open(QFile::ReadOnly);
     fileContents.clear();
     QString line;                       //to be manipulated by the function
-    const int MAX_RANGE = 53666;
+    const int MAX_RANGE = 2000;//53666;
 
     while(!input.atEnd()){              //read from .bat file
         if(input.getChar(&data)){

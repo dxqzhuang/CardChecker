@@ -62,11 +62,13 @@ void window4::generateTabs()
         //1. generate a table and fill it with cards of this bank
         QTableWidget*tableptr = new QTableWidget();
         generateTable(sortedData[i],tableptr);
+        cout << "table size: " << tableptr->size().width() << tableptr->size().height() << endl;
         tables.push_back(tableptr);
         cout << "table generated!!!" << endl;
 
         //2. generate a new tab with this table in it
         ui->window4_tabs_widget->addTab(tableptr,QString::fromStdString(sortedData[i][0]["bankName"]));
+        ui->window4_tabs_widget->setContentsMargins(0,0,0,0);
         cout << "now we have " << ui->window4_tabs_widget->count() << " tabs" << endl;
 
     };
@@ -153,7 +155,10 @@ void window4::generateTable(vector<map<string, string>>table_data, QTableWidget 
         @note each table has two columns: cardNumber and cardType
         @dependency: <QstringList> <vector> <map>
       */
-
+    //table->resize(table->parentWidget()->size());
+    //table->resize(ui->centralwidget->size());
+    table->resizeColumnsToContents();
+    table->resize(ui->window4_tabs_widget->size());
     //2 columns; as many rows as there are entries
     table->setRowCount(table_data.size());
     cout << "table_data.size: " << table_data.size() << endl;
@@ -177,6 +182,8 @@ void window4::generateTable(vector<map<string, string>>table_data, QTableWidget 
         table->setItem(i,0,cardNumItem);
         table->setItem(i,1,cardTypeItem);
     }
+    table->setColumnWidth(0,table->size().width()/2);
+    table->setColumnWidth(1,table->size().width()/2);
     cout << "generateTable: i finished!" << endl;
 }
 

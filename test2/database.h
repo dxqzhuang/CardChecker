@@ -23,6 +23,7 @@ class database
 {
 public:
     database();
+    ~database();
     bool readFromFile(const QString &fileName);
     QString randomCardType(string card);    //return a random card type("Classic", etc)
     bool whichBankIssuedThis(QString card, string& bankName, string&level);
