@@ -9,15 +9,21 @@ using namespace std;
 #include <ctime>
 #include <iostream>
 #include <algorithm>
+#include <QFutureWatcher>
+#include <QFuture>
+#include <QtConcurrent/QtConcurrent>
+#include <QProgressBar>
+
+
+
 using namespace std;
 
 enum ERRORS{BIN_NOT_FOUND};
 class database
 {
 public:
-
     database();
-    void readFromFile(const QString &fileName);
+    bool readFromFile(const QString &fileName);
     QString randomCardType(string card);    //return a random card type("Classic", etc)
     bool whichBankIssuedThis(QString card, string& bankName, string&level);
 
@@ -26,7 +32,7 @@ public:
 
 
 
-
+    QProgressBar* progress;
     std::vector<QString> visaBin;
     std::vector<QString> visaBankName;
     std::vector<QString> visaCardType1;
@@ -53,11 +59,15 @@ public:
     std::vector<ushort> mcPhoneSize;
     QString fileContents;
 
+    //
+    void setProgressBar(QProgressBar* bar);
+
 private:
     int search(const QString &name, char type);
     bool searchVisa(const string &cardType, const string& bankName, string &bin);
     bool searchMc(const string &cardType, const string& bankName, string &bin);
     bool searchAmex(const string &cardType, string&bin);
+
 };
 
 #endif // DATABASE_H

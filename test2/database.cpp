@@ -6,12 +6,13 @@ database::database()
 }
 
 
-void database::readFromFile(const QString &fileName){
+bool database::readFromFile(const QString &fileName){
     char data;
     QFile input(fileName);
     input.open(QFile::ReadOnly);
     fileContents.clear();
     QString line;                       //to be manipulated by the function
+    const int MAX_RANGE = 53666;
 
     while(!input.atEnd()){              //read from .bat file
         if(input.getChar(&data)){
@@ -21,7 +22,8 @@ void database::readFromFile(const QString &fileName){
 
     size_t entry=0, amex=0, mc=0, visa=0;
     QChar type;
-    while(entry<53666){                  //total entries: 53666
+    progress->setRange(0,MAX_RANGE);
+    while(entry<MAX_RANGE){                  //total entries: 53666
         //0. reading in type
         type=fileContents[0];
         switch(type.toLatin1()){
@@ -104,8 +106,10 @@ void database::readFromFile(const QString &fileName){
             //ui->outputField->append("Error reading in type.");
         }
         entry++;
+        progress->setValue(entry);
     }
     input.close();
+    return true;
 }
 
 QString database::randomCardType(string card)
@@ -231,3 +235,8 @@ bool database::searchAmex(const string& cardType, string&bin)
     return true;
 }
 
+void database::setProgressBar(QProgressBar* bar)
+{
+    delete progress;
+    progress = bar;
+}

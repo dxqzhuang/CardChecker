@@ -32,9 +32,12 @@ class MainWindow : public QMainWindow
         window2 *wind2;
         window3 *wind3;
         database db;
+        QProgressBar* pgbar;
 
 
         void connectSignalsSlots();
+        void setBusyStatus(const string& status);
+        void setNormalStatus(const string& status);
 
 //        void readVisaFile(const QString &fileName);
 //        void readAmexFile(const QString &fileName);

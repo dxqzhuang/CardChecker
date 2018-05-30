@@ -10,6 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connectSignalsSlots();
 
+    pgbar = ui->window1_progress_bar;
+    pgbar->setValue(0);
+    db.setProgressBar(pgbar);
+    ui->window1_progress_box->setVisible(false);    //shoule not be visible yet
 }
 
 
@@ -46,16 +50,47 @@ void MainWindow::window1_generate_btn_pressed()
 
 void MainWindow::loadDatabase()
 {
+//    QString fileName=QFileDialog::getOpenFileName(NULL,"Source File","/Users/pjw/Dropbox/CS 3A/2018/Mars" , "*.dat");
+//    if(fileName.isNull())
+//        return;
+//    if(QFileInfo(fileName).suffix().isEmpty())
+//       fileName.append(".dat");
+//    db.readFromFile(fileName);
+
+    using resultType = bool;
     QString fileName=QFileDialog::getOpenFileName(NULL,"Source File","/Users/pjw/Dropbox/CS 3A/2018/Mars" , "*.dat");
     if(fileName.isNull())
         return;
     if(QFileInfo(fileName).suffix().isEmpty())
        fileName.append(".dat");
-    db.readFromFile(fileName);
+    auto watcher = new QFutureWatcher<void>{this};
+    auto future = QtConcurrent::run([=]{
+            return db.readFromFile(fileName);
+        });
+    connect(watcher, &QFutureWatcher<resultType>::finished, this, [=]{
+
+        watcher->deleteLater();
+        setNormalStatus("All data has been retrieved!");
+    });
+    watcher->setFuture(future);
+    setBusyStatus("Getting data");
+    //add bar to it
+
 }
 
 
-
+void MainWindow::setBusyStatus(const string& status)
+{
+    cout << "status: " << status << endl;
+    ui->window1_progress_box->setVisible(true);
+}
+void MainWindow::setNormalStatus(const string& status)
+{
+    cout << "status: " << status << endl;
+    ui->window1_check_btn->setEnabled(true);
+    ui->window1_generate_btn->setEnabled(true);
+    ui->window1_progress_box->setVisible(false);
+}
 
 
 
