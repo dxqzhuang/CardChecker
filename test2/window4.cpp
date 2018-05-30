@@ -194,6 +194,7 @@ void window4::connectSignalsSlots()
 
 void window4::window4_save_btn_pressed()
 {
+    QString outputFileName(QDir::currentPath()+QString::fromStdString("/table.pdf"));
     QString strStream;
     QTextStream out(&strStream);
 
@@ -228,8 +229,15 @@ void window4::window4_save_btn_pressed()
 
     QPrinter printer;
 
-    printer.setOutputFileName(QDir::currentPath()+QString::fromStdString("/table.pdf"));
+    printer.setOutputFileName(outputFileName);
     document->print(&printer);
 
     delete document;
+
+    QMessageBox box;
+    QString str;
+    str.append("Outputted to: ");
+    str.append(outputFileName);
+    box.setText(str);
+    box.exec();
 }

@@ -17,6 +17,7 @@
 #include <QTextStream>
 #include <QTextDocument>
 #include <QDir>
+#include <QMessageBox>
 
 
 namespace Ui {
